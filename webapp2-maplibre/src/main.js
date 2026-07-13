@@ -1,6 +1,5 @@
 import { Map } from 'maplibre-gl';
-import naturalEarthData from './data/ne.geojson?url';
-import areaData from './data/area.geojson?url';
+import { addKotaLayer, addPulauLayer } from './layers/vector';
 
 const mapElement = document.createElement('div');
 mapElement.id = 'map';
@@ -10,7 +9,7 @@ document.body.appendChild(mapElement);
 const map = new Map({
   container: 'map',
   style: 'https://demotiles.maplibre.org/globe.json',
-  center: [106.89,-6.19],
+  center: [106.83, -6.19],
   zoom: 1
 });
 
@@ -33,44 +32,13 @@ const map = new Map({
 //   ]
 // }
 
-map.on('load', () => {
 
-  //layer vektor titik
-  map.addSource('kota', {
-    type: "geojson",
-    data: naturalEarthData
-  });
+map.on("load", () => {
+  addKotaLayer(map);
+  addPulauLayer(map);
 
-  map.addLayer({
-    id: "titik-kota",
-    type: "circle",
-    source: "kota",
-    paint: {
-      "circle-radius": 3,
-      "circle-color": "red",
-      "circle-stroke-width": 1,
-      "circle-stroke-color" : "black"
-    }
-  })
-
-  //layer vektor polygon
-  map.addSource('pulau', {
-    type: "geojson",
-    data: areaData
-  })
-
-  map.addLayer({
-    id: "area-pulau",
-    type: "fill",
-    source: "pulau",
-    paint: {
-      "fill-color": "yellow",
-      "fill-outline-color": "black"
-    }
-  })
-
-//layer raster
-map.addSource("spongebob", {
+  // Layer Raster
+  map.addSource("spongebob", {
     type: "image",
     url: "https://static.wikia.nocookie.net/cartoons/images/e/ed/Profile_-_SpongeBob_SquarePants.png",
     coordinates: [
@@ -87,6 +55,4 @@ map.addSource("spongebob", {
     source: "spongebob",
   })
 
-  
 })
-
