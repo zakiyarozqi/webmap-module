@@ -1,4 +1,5 @@
 import { Map } from 'maplibre-gl';
+import naturalEarthData from './data/ne.geojson?url';
 
 const mapElement = document.createElement('div');
 mapElement.id = 'map';
@@ -12,29 +13,29 @@ const map = new Map({
   zoom: 6
 });
 
-const data = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Jakarta"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          106.3343232,
-          -6.1416728
-        ]
-      }
-    }
-  ]
-}
+// const data = {
+//   "type": "FeatureCollection",
+//   "features": [
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "name": "Jakarta"
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           106.3343232,
+//           -6.1416728
+//         ]
+//       }
+//     }
+//   ]
+// }
 
 map.on('load', () => {
   map.addSource('kota', {
     type: "geojson",
-    data: data
+    data: naturalEarthData
   });
 
   map.addLayer({
