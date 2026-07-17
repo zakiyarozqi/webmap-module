@@ -3,6 +3,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { addKotaLayer, addPulauLayer } from './layers/vector';
 import { addSpongebobImage } from './layers/raster';
 import { addAttribution } from './controls/basicControls';
+import { LogoMapidControl } from './controls/customLogoControl';
 
 const mapElement = document.createElement('div');
 mapElement.id = 'map';
@@ -29,3 +30,4 @@ addAttribution(map, "Natural Earth Dataset, Nickelodeon");
 map.addControl(new FullscreenControl());
 map.addControl(new GlobeControl());
 map.addControl(new LogoControl({compact:false}));
+map.addControl(new LogoMapidControl(), "top-left");
