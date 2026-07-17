@@ -22,6 +22,7 @@ const map = new Map({
   center: [106.83, -6.19],
   zoom: 1,
   attributionControl: false,
+  cooperateGestures: true
 });
 
 map.on("load", () => {
@@ -34,6 +35,8 @@ map.on("load", () => {
 map.on("click", "titik-kota", function(event){
   addKotaPopup(map, event);
 })
+
+map.doubleClickZoom.disable();
 
 //Controls setting
 addAttribution(map, "Natural Earth Dataset, Nickelodeon");
