@@ -1,4 +1,4 @@
-import { Map } from 'maplibre-gl';
+import { Map, FullscreenControl, GlobeControl, LogoControl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { addKotaLayer, addPulauLayer } from './layers/vector';
 import { addSpongebobImage } from './layers/raster';
@@ -24,4 +24,8 @@ map.on("load", () => {
 
 });
 
+//Controls setting
 addAttribution(map, "Natural Earth Dataset, Nickelodeon");
+map.addControl(new FullscreenControl());
+map.addControl(new GlobeControl());
+map.addControl(new LogoControl({compact:false}));
